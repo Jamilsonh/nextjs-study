@@ -36,7 +36,7 @@ export default function Joken() {
   };
 
   return (
-    <div className='flex items-center justify-center h-screen w-screen bg-gray-900'>
+    <div className='flex items-center justify-center h-full w-full bg-gray-900'>
       <div className='bg-gray-600 w-1/2 h-3/5 border-white border-4 rounded-3xl p-4 flex flex-col justify-center items-center text-3xl mx-auto '>
         <h1>Escolha uma opção:</h1>
         <div>
