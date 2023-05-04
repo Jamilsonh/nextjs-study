@@ -14,20 +14,27 @@ function Layout({ children }: LayoutProps) {
             href='/'
             className='bg-slate-200 px-6 py-1 rounded-xl items-center text-slate-900 hover:bg-sky-200'
           >
-            Page 1
+            TESTE NO CODIGO
           </Link>
           <Link
             href='/jokenpo'
             className='bg-slate-200 px-6 py-1 rounded-xl items-center text-slate-900 hover:bg-sky-200'
           >
-            Page 2
+            JOKENPO
           </Link>
 
           <Link
             href='/condicional'
             className='bg-slate-200 px-6 py-1 rounded-xl items-center text-slate-900 hover:bg-sky-200'
           >
-            Page 3
+            PERGUNTAS
+          </Link>
+
+          <Link
+            href='/starwars'
+            className='bg-slate-200 px-6 py-1 rounded-xl items-center text-slate-900 hover:bg-sky-200'
+          >
+            STAR WARS API
           </Link>
         </div>
       </div>
