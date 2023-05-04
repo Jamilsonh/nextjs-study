@@ -22,6 +22,13 @@ function Layout({ children }: LayoutProps) {
           >
             Page 2
           </Link>
+
+          <Link
+            href='/condicional'
+            className='bg-slate-200 px-6 py-1 rounded-xl items-center text-slate-900 hover:bg-sky-200'
+          >
+            Page 3
+          </Link>
         </div>
       </div>
       <main className='w-full h-5/6 flex justify-center items-center'>
