@@ -36,6 +36,12 @@ function Layout({ children }: LayoutProps) {
           >
             STAR WARS API
           </Link>
+          <Link
+            href='/randombuttons'
+            className='bg-slate-200 px-6 py-1 rounded-xl items-center text-slate-900 hover:bg-sky-200'
+          >
+            RANDOM BUTTONS
+          </Link>
         </div>
       </div>
       <main className='w-full h-5/6 flex justify-center items-center'>
