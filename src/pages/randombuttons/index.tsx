@@ -1,39 +1,77 @@
-import Button from '@/components/RandomButton';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Head from 'next/head';
+import classNames from 'classnames';
 
-export default function RandomButtons() {
-  const [chosenButton, setChosenButton] = useState<string>();
+const BUTTONS = ['A', 'B', 'C'];
 
-  const handleChooseButton = () => {
-    const randomNumber = Math.floor(Math.random() * 3) + 1;
-    switch (randomNumber) {
-      case 1:
-        setChosenButton('A');
-        break;
-      case 2:
-        setChosenButton('B');
-        break;
-      case 3:
-        setChosenButton('C');
-        break;
-      default:
-        break;
-    }
-  };
+export default function Home() {
+  const [chosenButton, setChosenButton] = useState<string | null>(null);
+  const [highlightedButton, setHighlightedButton] = useState<string | null>(
+    null
+  );
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const randomButton = BUTTONS[Math.floor(Math.random() * BUTTONS.length)];
+      setHighlightedButton(randomButton);
+      setTimeout(() => {
+        setHighlightedButton(null);
+        setChosenButton(randomButton);
+        setTimeout(() => {
+          setChosenButton(null);
+        }, 2000);
+      }, 2000);
+    }, 3000); // run every 3 seconds
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
-    <div className='flex items-center justify-center h-full w-full bg-gray-900'>
-      <div className='bg-gray-600 w-1/2 h-3/5 border-white border-4 rounded-3xl flex justify-between items-center text-3xl mx-auto overflow-hidden '>
-        <div className='flex mb-4'>
-          <Button text='A' onClick={() => setChosenButton('A')} />
-          <Button text='B' onClick={() => setChosenButton('B')} />
-          <Button text='C' onClick={() => setChosenButton('C')} />
+    <div className='flex flex-col items-center justify-center min-h-screen'>
+      <Head>
+        <title>Random Button Chooser</title>
+        <meta name='description' content='Choose a button at random' />
+        <link rel='icon' href='/favicon.ico' />
+      </Head>
+
+      <main className='flex flex-col items-center justify-center space-y-4'>
+        <h1 className='text-4xl font-bold'>Random Button Chooser</h1>
+
+        <div className='flex space-x-4'>
+          {BUTTONS.map((button) => (
+            <button
+              key={button}
+              className={classNames(
+                'py-2 px-4 rounded-lg transition-colors duration-500',
+                {
+                  'bg-green-500': chosenButton === button,
+                  'bg-gray-200 hover:bg-gray-300': highlightedButton === button,
+                  'bg-gray-200':
+                    chosenButton !== button && highlightedButton !== button,
+                }
+              )}
+              disabled={chosenButton !== null}
+            >
+              {button}
+            </button>
+          ))}
         </div>
-        <Button text='Escolher botão' onClick={handleChooseButton} />
-        {chosenButton && (
-          <p className='mt-4'>{`Botão escolhido: ${chosenButton}`}</p>
-        )}
-      </div>
+
+        <button
+          className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+          onClick={() => {
+            const randomButton =
+              BUTTONS[Math.floor(Math.random() * BUTTONS.length)];
+            setChosenButton(randomButton);
+            setTimeout(() => {
+              setChosenButton(null);
+            }, 2000);
+          }}
+          disabled={chosenButton !== null}
+        >
+          Choose randomly
+        </button>
+      </main>
     </div>
   );
 }
